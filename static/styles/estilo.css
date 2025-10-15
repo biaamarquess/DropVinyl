@@ -1,0 +1,1171 @@
+@import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Alice&family=Annie+Use+Your+Telescope&family=Anton&family=Bebas+Neue&family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=League+Spartan:wght@100..900&family=Lilita+One&family=Oleo+Script:wght@400;700&family=Playwrite+DK+Loopet:wght@100..400&family=Questrial&family=Sigmar&display=swap');
+
+body{
+    background-color: black;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+
+ /* Estilos para a seção Histórico */
+  #historico {
+    padding: 60px 0;
+    background: linear-gradient(180deg, #000000 0%, #1a0a12 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .historico-titulo {
+    font-family: "Anton", sans-serif;
+    color: white;
+    text-align: center;
+    font-size: 60px;
+    margin-bottom: 40px;
+    text-shadow: 0 0 10px rgba(167, 70, 126, 0.7);
+    position: relative;
+    z-index: 2;
+  }
+  
+  .historico-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(19, 19, 19, 0.9);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(139, 13, 91, 0.3);
+    border: 1px solid rgba(167, 70, 126, 0.3);
+    position: relative;
+    z-index: 2;
+  }
+  
+  .historico-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #a7467e, #862c5d, #a51a54);
+    z-index: 3;
+  }
+  
+  .historico-header {
+    background: rgba(14, 14, 14, 0.95);
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(167, 70, 126, 0.2);
+  }
+  
+  .historico-info {
+    display: grid;
+    grid-template-columns: 3fr 2fr 1fr;
+    color: #a7467e;
+    font-family: "Questrial", sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .historico-list {
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 10px 0;
+  }
+  
+  .historico-item {
+    display: grid;
+    grid-template-columns: 3fr 2fr 1fr;
+    padding: 15px 20px;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-family: "Questrial", sans-serif;
+  }
+  
+  .historico-item:hover {
+    background: rgba(167, 70, 126, 0.1);
+    transform: translateX(5px);
+  }
+  
+  .historico-item:last-child {
+    border-bottom: none;
+  }
+  
+  .musica-titulo {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .musica-artista {
+    color: #a7467e;
+    font-size: 14px;
+  }
+  
+  .musica-data {
+    color: #9a9a9a;
+    font-size: 12px;
+    text-align: right;
+  }
+  
+  .historico-vazio {
+    text-align: center;
+    padding: 60px 20px;
+    color: #9a9a9a;
+  }
+  
+  .disco-vazio {
+    width: 80px;
+    opacity: 0.5;
+    margin-bottom: 20px;
+    animation: girar 10s linear infinite;
+  }
+  
+  .historico-vazio p {
+    font-family: "Questrial", sans-serif;
+    font-size: 16px;
+  }
+  
+  .historico-controls {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background: rgba(14, 14, 14, 0.8);
+    border-top: 1px solid rgba(167, 70, 126, 0.2);
+  }
+  
+  .historico-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(45deg, #a7467e, #862c5d);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-family: "Questrial", sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(167, 70, 126, 0.3);
+  }
+  
+  .historico-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(167, 70, 126, 0.5);
+    background: linear-gradient(45deg, #b85892, #963a6b);
+  }
+  
+  .btn-icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  /* Elementos decorativos de fundo */
+  .historico-decorativo {
+    position: absolute;
+    opacity: 0.03;
+    z-index: 1;
+  }
+  
+  .decorativo-1 {
+    top: 10%;
+    left: 5%;
+    font-size: 120px;
+    color: #a7467e;
+  }
+  
+  .decorativo-2 {
+    bottom: 20%;
+    right: 8%;
+    font-size: 100px;
+    color: #862c5d;
+  }
+  
+  /* Scrollbar personalizada */
+  .historico-list::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .historico-list::-webkit-scrollbar-track {
+    background: rgba(14, 14, 14, 0.5);
+  }
+  
+  .historico-list::-webkit-scrollbar-thumb {
+    background: #a7467e;
+    border-radius: 3px;
+  }
+  
+  .historico-list::-webkit-scrollbar-thumb:hover {
+    background: #b85892;
+  }
+
+
+
+
+
+.album-image {
+    width: 200px;
+    height: 190px;
+    
+}
+
+::-webkit-scrollbar {
+  display: none; /* oculta completamente */
+}
+
+#songList {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE e Edge antigos */
+}
+
+.menu-btn {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 22px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.menu-btn span {
+  display: block;
+  height: 4px;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+#menu-toggle {
+  display: none;
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  right: -260px;
+  width: 250px;
+  height: 100%;
+  background: #000000;
+  box-shadow: -4px 0 10px rgba(139, 13, 91, 0.436);
+  transition: right 0.4s ease;
+  padding-top: 80px;
+  z-index: 1000;
+}
+
+/* Links */
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  
+}
+
+.menu ul li {
+  opacity: 0;
+  transform: translateX(30px);
+  margin: 20px 0;
+  margin-left: 50px;
+  transition: all 0.4s ease;
+}
+
+.menu ul li a {
+  color: #9a9a9a;
+  text-decoration: none;
+  font-size: 15px;
+  transition: color 0.3s;
+}
+
+.musicc{
+  margin-left: 10px;
+}
+
+.disquinho{
+  margin-left: 10px;
+}
+
+.micro{
+  margin-left: 10px;
+}
+
+.franquinho{
+  margin-top: 50px;
+}
+
+.franquinho[src*="franfran.png"] {
+  width: 330px; /* menor */
+  margin-left: -25px;
+}
+
+.menu ul li a:hover {
+  color: #ff4081;
+}
+
+/* Quando o menu abre */
+#menu-toggle:checked ~ .menu {
+  right: 0;
+}
+
+/* Efeito cascata nos links */
+#menu-toggle:checked ~ .menu ul li {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+#menu-toggle:checked ~ .menu ul li:nth-child(1) { transition-delay: 0.2s; }
+#menu-toggle:checked ~ .menu ul li:nth-child(2) { transition-delay: 0.3s; }
+#menu-toggle:checked ~ .menu ul li:nth-child(3) { transition-delay: 0.4s; }
+#menu-toggle:checked ~ .menu ul li:nth-child(4) { transition-delay: 0.5s; }
+
+/* Animação do ícone hamburguer para "X" */
+#menu-toggle:checked + .menu-btn span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+#menu-toggle:checked + .menu-btn span:nth-child(2) {
+  opacity: 0;
+}
+#menu-toggle:checked + .menu-btn span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+
+.botao{
+    background-color: transparent;
+    border: none;
+    
+
+    width: 30px;
+    margin: 0 0 8px;
+    font-size: 25px;
+    font-weight: 300;
+}
+
+.ladinho{
+    margin-left: 30px;
+    margin-top: -380PX;
+    display: flex;
+    flex-direction: column; 
+    gap: 10px;
+   
+}
+
+.botao:hover {
+ transform: translateY(-1px);
+}
+
+.botao:active {
+ border-color: rgba(0, 0, 0, 0.15);
+ box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+ color: rgba(0, 0, 0, 0.65);
+ transform: translateY(0);
+}
+
+.logo{
+    margin-left: 60px;
+    margin-top: 40px;
+}
+
+.fundo{
+    width: 100%;
+    margin-top: -200px;
+    z-index: -1 !important;
+    position: relative;
+}
+
+.inicio{
+    margin-top: -760px;
+}
+
+.musiquinhas{
+    margin-top: 300px;
+    margin-left: -1070px;
+  
+}
+
+footer{
+    position: absolute;
+}
+
+#serverUrl{
+    margin-left: 30px;
+    width: 300px;
+    padding: 7px 7px ;
+    border-radius: 15px;
+    border-color: rgb(176, 79, 119);
+    background-color: transparent;
+    color: white;
+    box-shadow: 
+    10px 10px 20px #862c5d,
+    -10px -10px 40px #63073e8f;
+}
+
+#serverUrl:hover{
+    transform: translateY(-1px);
+}
+
+#connectBtn{
+    padding: 7px 7px ;
+    border-radius: 15px;
+    border-color: rgb(176, 79, 119);
+    background-color: transparent;
+    color: white;
+    box-shadow: 
+    10px 10px 20px #862c5d,
+    -10px -10px 40px #63073e8f;
+}
+
+#connectBtn:hover{
+    transform: translateY(-1px);
+}
+
+.disco{
+    margin-left: 520px;
+    margin-top: -290px;
+    position: relative;
+    z-index: -1;
+
+    animation-name: girar;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.agulha{
+    margin-left: 560px;
+}
+
+
+@keyframes girar {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+
+
+
+.song-box {
+  background: #0e0e0e;       
+  padding: 20px;
+  border-radius: 12px;
+  width: 400px;               
+  margin: 20px auto;                 
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  margin-left: 90px;
+  width: 350px;
+  position: static;
+}
+
+
+
+.song-box h2 {
+  margin-top: 0;
+  text-align: center;
+  font-size: 22px;
+  color: #fdfdfd;
+}
+
+#songList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 200px;          
+  overflow-y: auto;           
+}
+
+#songList li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #131313;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  color: #252525;
+  color: white;  
+  font-size: 12px;
+}
+
+#songList li .meta {
+  display: flex;
+  flex-direction: column;
+}
+
+#songList li button {
+  background: transparent;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#songList li button:hover {
+  background: #590d348a;
+}
+
+
+
+
+.server-input{
+    
+    margin-top: -500px;
+    margin-left: 60px;
+}
+
+main{
+    margin-left: 100px;
+}
+
+.player {
+  text-align: center;
+  background: black;
+  color: rgb(170, 165, 165);
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  margin: auto;
+}
+
+#progress {
+  width: 100%;
+  margin: 15px 0;
+  -webkit-appearance: none;
+  background: white;
+  height: 3px;
+  border-radius: 5px;
+  outline: none;
+}
+
+#progress::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.controls button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+#playPause {
+  font-size: 40px;
+}
+
+
+
+/* segunda parte */
+
+
+.albuns-slide {
+    margin-left: 500px;
+    margin-top: 800px;
+   
+
+    display: inline-block;
+    animation: 10s slide infinite linear;
+}
+
+.albuns-slide-dois {
+  margin-left: 500px;
+  margin-top: 90px;
+
+  display: inline-block;
+  animation: 10s slide infinite linear;
+}
+
+.albuns-slide-tres{
+  margin-left: 500px;
+  margin-top: 90px;
+
+  display: inline-block;
+  animation: 10s slide infinite linear;
+}
+
+
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.albuns{
+    font-family: "Anton", sans-serif;
+    color: white;
+    margin-top: 600px;
+    margin-left: 650px;
+    font-size: 60px;
+}
+
+.artistas{
+  font-family: "Anton", sans-serif;
+  color: white;
+  margin-top: 100px;
+  margin-left: 675px;
+  font-size: 60px;
+}
+
+.albuns-slide{
+    z-index: -1;
+    margin-top: 100px;
+}
+
+.divos{
+    margin-top: -700px;
+    z-index: -1;
+}
+
+.djavan{
+    margin-left: -30px;
+    opacity: 0.5;
+    z-index: -1;
+}
+
+.diva{
+    margin-left: 720px;
+    opacity: 0.5;
+    z-index: -1;
+}
+
+.linha{
+  margin-top: 300px;
+  margin-left: 250px;
+}
+
+/* terceira parte */
+
+.terceira{
+  margin-top: -50px;
+}
+
+.imagens{
+  margin-top: 30px;
+  margin-left: -20px;
+}
+.ddj{
+  margin-top: 50px;
+  margin-left: 600px;
+  animation: flutuar 3s ease-in-out infinite;
+  position: absolute;
+}
+
+.divaa{
+  margin-left: 370px;
+  margin-top: 200px;
+  animation: flutuar 5s ease-in-out infinite;
+  position: absolute;
+}
+
+.divinho{
+  position: absolute;
+  margin-left: 430px;
+  margin-top: 40px;
+  animation: flutuar 4s ease-in-out infinite;
+}
+
+.dani{
+  margin-left: 250px;
+  margin-top: -20px;
+  animation: flutuar 3s ease-in-out infinite;
+  position: absolute;
+}
+
+.belo{
+  position: absolute;
+  margin-top: 170px;
+  margin-left: 230px;
+  animation: flutuar 4s ease-in-out infinite;
+}
+
+.lindinhos{
+  position: absolute;
+  margin-top: 25px;
+  margin-left: 80px;
+  animation: flutuar 5s ease-in-out infinite;
+}
+
+.michael{
+  position: absolute;
+  margin-left: 1000px;
+  animation: flutuar 5s ease-in-out infinite;
+}
+
+.bruninho{
+  position: absolute;
+  margin-left: 1180px;
+  animation: flutuar 3s ease-in-out infinite;
+}
+
+.chico{
+  position: absolute;
+  margin-left: 1030px;
+  margin-top: 190px;
+  animation: flutuar 4s ease-in-out infinite;
+}
+
+.deliz{
+  position: absolute;
+  margin-left: 1170px;
+  margin-top: 140px;
+  animation: flutuar 2.9s ease-in-out infinite;
+}
+
+.divonicaa{
+  position: absolute;
+  margin-top: 200px;
+  margin-left: 100px;
+  animation: flutuar 4s ease-in-out infinite;
+}
+
+.ale{
+  position: absolute;
+  margin-top: 300px;
+  margin-left: 200px;
+  animation: flutuar 5s ease-in-out infinite;
+}
+
+.kpop{
+  position: absolute;
+  margin-left: 1320px;
+  margin-top: 30px;
+  animation: flutuar 4s ease-in-out infinite;
+}
+
+.real{
+  position: absolute;
+  margin-left: 1350px;
+  margin-top: 200px;
+  animation: flutuar 5s ease-in-out infinite;
+}
+
+.veve{
+  position: absolute;
+  margin-left: 1170px;
+  margin-top: 320px;
+  animation: flutuar 3s ease-in-out infinite;
+}
+
+.peri{
+  position: absolute;
+  margin-left: 1010px;
+  margin-top: 320px;
+   animation: flutuar 2.9s ease-in-out infinite;
+}
+
+@keyframes flutuar {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
+}
+
+/* Delays diferentes para não se moverem iguais */
+.delay1 {
+  animation-delay: 0.5s;
+}
+
+.delay2 {
+  animation-delay: 1s;
+}
+
+.linha-dois{
+  margin-left: 250px;
+  margin-top: 600px;
+}
+
+/* ultima parte*/
+
+.frase{
+  color: white;
+  margin-top: 100px;
+  margin-left: 350px;
+}
+
+.final{
+  margin-top: 30px;
+}
+
+.finalzinho{
+  margin-left: 350px;
+  margin-top: 100px;
+}
+
+.finalzao{
+  width: 100%;
+  position: absolute;
+  margin-left: -1150px;
+  margin-top: 200px;
+  z-index: -1;
+}
+
+.loguinho{
+  position: absolute;
+  margin-left: -445px;
+  margin-top: 900px;
+}
+
+.fim{
+  color: white;
+  margin-left: 100px;
+  margin-top: 670px;
+}
+
+.musiquitas{
+  position: absolute;
+  margin-top: 900px;
+  margin-left: -760px;
+  padding: 20px 70px;
+  background-color: transparent;
+  border-color: white;
+  font-size: 20px
+}
+
+.musiquitas a{
+  text-decoration: none;
+  color: white;
+}
+
+.musiquitas:hover{
+  background-color: #700a4243;
+}
+
+.artistass{
+  position: absolute;
+  margin-top: 900px;
+  margin-left: -250px;
+  padding: 20px 70px;
+  background-color: white;
+  font-size: 20px;
+  border-color: white;
+}
+
+.artistass:hover{
+  background-color: #db649b95;
+}
+
+.artistass a{
+  text-decoration: none;
+  color: black;
+}
+
+.top{
+  color: white;
+  margin-left: 450px;
+  margin-top: 20px;
+  font-size: 15px;
+}
+
+
+
+
+/* ================== RESPONSIVIDADE ================== */
+@media (max-width: 768px) {
+
+  html{
+    width: 100%;
+  }
+
+  .logo{
+    position: absolute;
+    margin-left: 10px;
+    width: 50px;
+  }
+
+  span{
+    width: 5px;
+    margin-left: 15px;
+    
+  }
+
+  .botao{
+    width: 5%;
+  }
+
+  .disco{
+    margin-top: -455px;
+    margin-left: 60px;
+    position: absolute;
+    width: 70%;
+  }
+
+  .fundo{
+    width: 100%;
+    height: 135vh;
+  }
+
+  .song-box{
+    width: 300px;
+    margin-left: 30px;
+  }
+
+  #serverUrl{
+    margin-left: -20px;
+    width: 50%;
+    margin-top: 370px;
+  }
+
+  .ladinho{
+    display: none;
+  }
+
+  #connectBtn{
+    margin-left: 10px;
+    margin-top: 300px;
+  }
+
+  .musiquinhas{
+    margin-left: -60px;
+    margin-top: 310px;
+  }
+
+  #albuns{
+    margin-top: -170px;
+  }
+  
+
+  .albuns{
+    position: absolute;
+    margin-left: 130px;
+    font-size: 30px;
+    margin-top: 330px;
+  }
+
+  .djavan{
+    width: 140px;
+     position: absolute;
+     margin-top: 430px;
+  }
+
+  .diva{
+    position: absolute;
+    width: 130px;
+    margin-left: 300px;
+    margin-top: 430px;
+  }
+
+  .albuns-slide{
+    margin-top: 420px;
+    margin-left: 100px;
+  }
+
+  .um, .dois, .tres, .quatro, .cinco{
+    width: 50px;
+  }
+
+  .albuns-slide-dois{
+    margin-top: 50px;
+    margin-left: 100px;
+  }
+
+  .seis, .sete, .oito, .nove, .dez{
+    width: 50px;
+  }
+
+  .linha{
+    margin-top: 800px;
+    margin-left: 10px;
+  }
+
+  .imagens {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  
+    margin-top: 30px;
+    margin-left: -200px;
+  }
+
+  .artistas{
+    display: none;
+  }
+
+  #artistas{
+    display: none;
+  }
+
+  .linha-dois{
+    display: none;
+  }
+
+  .frase{
+    margin-left: 50px;
+    font-size: 15px;
+    width: 300px;
+    text-align: center;
+  }
+
+  .finalzinho{
+    margin-left: 50px;
+    width: 300px;
+  }
+
+  .finalzao{
+    position: absolute;
+    width: 530px;
+    margin-left: -410px;
+  }
+
+  .fim{
+   display: none;
+  }
+
+  .artistass{
+    display: none;
+  }
+
+  .musiquitas{
+    display: none;
+  }
+
+  .loguinho{
+    margin-top: 460px;
+    margin-left: -190px;
+    width: 100px;
+  }
+
+  .top{
+    display: none;
+  }
+
+  .arte{
+    display: none;
+  }
+
+  .carousel-sidebar{
+    display: none;
+  }
+
+  .agulha{
+    display: none;
+  }
+
+  .carousel-container{
+    display: none;
+  }
+       
+  
+  .inicio{
+    display: none;
+  }
+
+  .server-input{
+    margin-top: -950px;
+  }
+
+  .foo{
+    display: none;
+  }
+
+  .carousel-item.active{
+    display: none;
+  }
+
+  .carousel-btn{display: none;}
+
+  .carousel-controls{
+    display: none;
+  }
+
+  .indicators {
+    display: none;
+  }
+
+  .indicator{
+    display: none;
+  }
+
+  .fran{
+    margin-top: 300px;
+  }
+
+  .agulha{
+    display: none;
+  }
+
+  .disco{
+    display: none;
+  }
+
+  .linha{
+    width: 50%;
+    margin-left: 100px;
+  }
+
+  .linha-dois{
+    display: none;
+  }
+
+  #menu-toggle{
+    display: none;
+  }
+
+  .menu-btn{
+    display: none;
+  }
+
+  #status{
+    display: none;
+  }
+
+  .song-box{
+    display: none;
+  }
+
+  .songList{
+    display: none;
+  }
+
+  .carousel-sidebar{
+    display: none;
+  }
+
+  .carousel-controls{
+    display: none;
+  }
+
+  .carousel-btn{
+    display: none;
+  }
+
+  .carousel-container{
+    display: none;
+  }
+
+  .indicators{
+    display: none;
+  }
+}
