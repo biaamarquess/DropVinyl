@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>DropVinyl</title>
+    <link rel="stylesheet" href="static/styles/estilo.css">
+    <link rel="icon" type="image" href="static/assets/disco.png">
+
+    <style>
+       .carousel-sidebar {
+            position: absolute;
+            top: 230px;
+            margin-left: 1000px;
+          
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 10;
+        }
+      
+        
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            max-width: 370px;
+            overflow: hidden;
+            padding: 10px 0;
+            margin-left: 150px;
+            
+        }
+        
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            gap: 15px;
+        }
+        
+        .carousel-item {
+            flex: 0 0 200px;
+            height: 250px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(139, 13, 91, 0.5); /* Cor do seu menu */
+            transition: all 0.4s ease;
+            position: relative;
+            background: #131313; /* Cor do seu song-box */
+            display: flex;
+            flex-direction: column;
+    
+        }
+        
+        .carousel-item.active {
+            transform: scale(1.05);
+            filter: none;
+            z-index: 2;
+            border: 2px solid #bf247991;
+        }
+        
+        .carousel-item.adjacent {
+            filter: blur(3px) brightness(0.8);
+            transform: scale(0.9);
+        }
+        
+        .carousel-item.distant {
+            filter: blur(5px) brightness(0.6);
+            transform: scale(0.85);
+            opacity: 0.7;
+        }
+        
+        .album-cover {
+            height: 65%;
+            background: linear-gradient(45deg, #a7467e, #862c5d); /* Cores do seu site */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .album-info {
+            margin-top: 10px;
+            padding: 10px;
+            height: 35%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+        }
+        
+        .album-title {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 3px;
+            color: #fff;
+            font-family: "Questrial", sans-serif;
+        }
+        
+        .album-artist {
+            font-size: 0.8rem;
+            color: #a7467e;
+            margin-bottom: 5px;
+            font-family: "Questrial", sans-serif;
+        }
+        
+        .album-year {
+            font-size: 0.7rem;
+            color: #9a9a9a;
+            font-family: "Questrial", sans-serif;
+        }
+        
+        .carousel-controls {
+            margin-left: 120px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .carousel-btn {
+            background: #a7467e;
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(145, 42, 85, 0.4);
+        }
+        
+        .carousel-btn:hover {
+            background: #a51a54;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 64, 129, 0.6);
+        }
+        
+        .indicators {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 15px;
+            margin-left: 120px;
+        }
+        
+        .indicator {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: rgba(139, 13, 91, 0.436);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .indicator.active {
+            background: #a51a54;
+            transform: scale(1.2);
+        }
+        
+        .music-note {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+      
+
+    </style>
+
+  </head>
+  <body>
+
+  <!-- Checkbox que controla o menu -->
+  <input type="checkbox" id="menu-toggle">
+  <label for="menu-toggle" class="menu-btn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </label>
+
+  <!-- Menu lateral -->
+  <nav class="menu">
+    <ul>
+      <li>
+        <a href="#inicio">Playlist</a>
+        <!--<img src="static/assets/musicc.png" width="15px" alt="" class="musicc">-->
+      </li>
+
+      <li>
+        <a href="#albuns">Albuns</a>
+        <!--<img src="static/assets/disquinho.png" width="15px" alt="" class="disquinho">-->
+      </li>
+
+      <li class="arte">
+        <a href="#artistas">Artistas</a>
+        <!--<img src="static/assets/micro.png" width="15px" alt="" class="micro">-->
+      </li>
+
+      <li>
+        <a href="#historico">Histórico</a>
+        <!--<img src="static/assets/micro.png" width="15px" alt="" class="micro">-->
+      </li>
+
+      <li class="fran">
+        <img src="static/assets/franquinho.png" onmouseover="this. src='./static/assets/franfran.png'" onmouseout="this. src= './static/assets/franquinho.png'" width="300px" alt="" class="franquinho">
+      </li>
+    </ul>
+
+  </nav>
+
+  <section id="inicio">
+
+      <img src="static/assets/logo.png" alt="" class="logo">
+      <img src="static/assets/fundo_inicio.png" alt="" class="fundo">
+
+      <div class="inicio">
+          <img src="static/assets/agulha.png" alt="" class="agulha">
+          <img src="static/assets/disco.png" alt="" class="disco">
+      </div>
+      
+      
+      <div class="server-input">
+          <input
+            id="serverUrl"
+            type="url"
+            inputmode="url"
+            placeholder="URL do servidor Flask (ex.: http://SEU-IP)"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button id="connectBtn" type="button">Conectar</button>
+      </div>
+
+      <footer class="foo">
+        <div id="status" aria-live="polite"></div>
+        <div class="song-box">
+          <ul id="songList"></ul>
+        </div>
+      </footer>
+
+      <div class="musiquinhas">
+      <main>
+      <div class="player">
+        <div id="nowPlaying">Nada tocando</div>
+        <audio id="audio" preload="none" src="sua-musica.mp3"></audio>
+
+        <!-- Barra de progresso -->
+        <input type="range" id="progress" value="0" min="0" step="1">
+
+        <!-- Controles -->
+        <div class="controls">
+          <button id="shuffle">♡</button>
+          <button id="prev">⏮</button>
+          <button id="playPause">▶</button>
+          <button id="next">⏭</button>
+          <button id="repeat">⇆</button>
+        </div>
+      </div>
+    </main>
+  </section>
+      
+      <!-- <div class="musiquinhas">
+        <main>
+          <div class="player">
+            <div id="nowPlaying">Nada tocando</div>
+            <audio id="audio" controls preload="none"></audio>
+          </div>
+        </main>
+      </div> -->
+
+      <div class="ladinho">
+        <button class="botao">
+          <img src="static/assets/casa.png" alt="" class="casa">
+        </button>
+
+        <button class="botao">
+          <img src="static/assets/coracao.png" alt="" class="coracao">
+        </button>
+
+        <button class="botao">
+          <img src="static/assets/music.png" alt="" class="music">
+        </button>
+      </div>
+
+      <div class="carousel-sidebar">
+        
+        <div class="carousel-container">
+            <div class="carousel">
+                <!-- Itens do carrossel serão gerados via JavaScript -->
+            </div>
+        </div>
+        
+        <div class="carousel-controls">
+            <button class="carousel-btn" id="prev-btn">&#10094;</button>
+            <button class="carousel-btn" id="next-btn">&#10095;</button>
+        </div>
+        
+        <div class="indicators">
+            <!-- Indicadores serão gerados via JavaScript -->
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.querySelector('.carousel');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const indicatorsContainer = document.querySelector('.indicators');
+            
+            // Dados dos álbuns
+            const albums = [
+                {
+                    title: "The Way It Is",
+                    artist: "Keyshia Cole",
+                    year: "2005",
+                    image: "static/assets/testeeee.png",
+                },
+                {
+                    title: "Just Like You",
+                    artist: "Keyshia Cole",
+                    year: "2007",
+                    image: "static/assets/belive.png",
+                },
+                {
+                    title: "A Different Me",
+                    artist: "Keyshia Cole",
+                    year: "2008",
+                    image: "static/assets/my.png",
+                },
+                {
+                    title: "Calling All Hearts",
+                    artist: "Keyshia Cole",
+                    year: "2010",
+                    image: "static/assets/2pac.png",
+                },
+                {
+                    title: "Woman to Woman",
+                    artist: "Keyshia Cole",
+                    year: "2012",
+                    image: "static/assets/dd.png",
+                },
+                {
+                    title: "Point of No Return",
+                    artist: "Keyshia Cole",
+                    year: "2014",
+                    image: "static/assets/arctic.png",
+                },
+                
+            ];
+            
+            let currentIndex = 0;
+            
+            // Criar itens do carrossel
+            function createCarouselItems() {
+                carousel.innerHTML = '';
+                indicatorsContainer.innerHTML = '';
+                
+                albums.forEach((album, index) => {
+                    // Criar item do carrossel
+                    const item = document.createElement('div');
+                    item.className = 'carousel-item';
+                    if (album.highlight) {
+                        item.style.border = '2px solid #e94560';
+                    }
+                    item.innerHTML = `
+                      <div class="album-cover">
+                        ${album.image ? 
+                          `<img src="${album.image}" alt="${album.title}" class="album-image">` : 
+                          `<span class="music-note">${album.icon}</span>`
+                        }
+                      </div>
+                      <div class="album-info">
+                          <div class="album-title">${album.title}</div>
+                          <div class="album-artist">${album.artist}</div>
+                          <div class="album-year">Lançamento: ${album.year}</div>
+                      </div>
+                    `;
+                    carousel.appendChild(item);
+                    
+                    // Criar indicador
+                    const indicator = document.createElement('div');
+                    indicator.className = 'indicator';
+                    if (index === currentIndex) indicator.classList.add('active');
+                    indicator.addEventListener('click', () => {
+                        currentIndex = index;
+                        updateCarousel();
+                    });
+                    indicatorsContainer.appendChild(indicator);
+                });
+                
+                updateCarousel();
+            }
+            
+            // Atualizar carrossel
+            function updateCarousel() {
+                const items = document.querySelectorAll('.carousel-item');
+                const indicators = document.querySelectorAll('.indicator');
+                
+                // Atualizar classes dos itens
+                items.forEach((item, index) => {
+                    item.classList.remove('active', 'adjacent', 'distant');
+                    
+                    if (index === currentIndex) {
+                        item.classList.add('active');
+                    } else if (index === currentIndex - 1 || index === currentIndex + 1) {
+                        item.classList.add('adjacent');
+                    } else {
+                        item.classList.add('distant');
+                    }
+                });
+                
+                // Atualizar indicadores
+                indicators.forEach((indicator, index) => {
+                    indicator.classList.toggle('active', index === currentIndex);
+                });
+                
+                // Calcular deslocamento para centralizar o item ativo
+                const itemWidth = items[0].offsetWidth + 20; // Largura do item + gap
+                const containerWidth = carousel.parentElement.offsetWidth;
+                const offset = -currentIndex * itemWidth + (containerWidth / 2 - itemWidth / 2);
+                carousel.style.transform = `translateX(${offset}px)`;
+            }
+            
+            // Event listeners para os botões
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + albums.length) % albums.length;
+                updateCarousel();
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % albums.length;
+                updateCarousel();
+            });
+            
+            // Inicializar carrossel
+            createCarouselItems();
+            
+            // Atualizar carrossel ao redimensionar a janela
+            window.addEventListener('resize', updateCarousel);
+            
+            // Navegação automática (opcional)
+            let autoSlide = setInterval(() => {
+                currentIndex = (currentIndex + 1) % albums.length;
+                updateCarousel();
+            }, 5000);
+            
+            // Pausar navegação automática ao interagir
+            carousel.addEventListener('mouseenter', () => {
+                clearInterval(autoSlide);
+            });
+            
+            carousel.addEventListener('mouseleave', () => {
+                autoSlide = setInterval(() => {
+                    currentIndex = (currentIndex + 1) % albums.length;
+                    updateCarousel();
+                }, 5000);
+            });
+        });
+    </script>
+
+    
+
+      <!-- segunda parte -->
+
+      <section id="albuns">
+
+        <h1 class="albuns">BEST ALBUNS</h1>
+
+        <div class="albuns-slide">
+            <img src="static/assets/kyan.png" width="200px" alt="" class="um">
+            <img src="static/assets/bk.png" alt="" width="200px" class="dois">
+            <img src="static/assets/frank.png" width="200px" alt="" class="tres">
+            <img src="static/assets/daniel.png" width="200px" alt="" class="quatro">
+            <img src="static/assets/folded.png" width="200px" alt="" class="cinco">
+        </div>
+
+        <div class="albuns-slide-dois">
+          <img src="static/assets/debut.png" width="200px" alt="" class="seis">
+          <img src="static/assets/justin.png" width="200px" alt="" class="sete">
+          <img src="static/assets/divos.png" width="200px" alt="" class="oito">
+          <img src="static/assets/df.png" width="200px" alt="" class="nove">
+          <img src="static/assets/gal.png" width="200px" alt="" class="dez">  
+        </div>
+      </div>
+
+      <!-- <div class="albuns-slide-tres">
+        <img src="static/assets/flor.png" width="200px" alt="" class="12">
+        <img src="static/assets/bruno.png" width="200px" alt="" class="13">
+        <img src="static/assets/chase.png" width="200px" alt="" class="14">
+        <img src="static/assets/wave.png" width="200px" alt="" class="15">
+        <img src="static/assets/pagode.png" width="200px" alt="" class="16">
+      </div> -->
+    
+      <div class="divos">
+          <img src="static/assets/djavan.png" alt="" class="djavan">
+          <img src="static/assets/diva.png" alt="" class="diva">
+      </div>
+    </section>
+
+    <!-- terceira parte -->
+
+      <div class="terceira">
+        <img src="static/assets/linha.png" alt="" class="linha">
+
+      <section id="artistas">
+
+        <h1 class="artistas">ARTISTAS</h1>
+        <div class="imagens">
+          <img src="static/assets/ddj.png" width="400px" alt="" class="ddj">
+          <img src="static/assets/divonica.png" width="200px" alt="" class="divaa">
+          <img src="static/assets/divinho.png" width="150px" alt="" class="divinho">
+          <img src="static/assets/ceaser.png" alt="" class="dani">
+          <img src="static/assets/belo.png" alt="" class="belo">
+          <img src="static/assets/lindinhos.png" alt="" class="lindinhos">
+          <img src="static/assets/michael.png" alt="" class="michael">
+          <img src="static/assets/bruninho.png" alt="" class="bruninho">
+          <img src="static/assets/chico.png" alt="" class="chico">
+          <img src="static/assets/deliz.png" alt="" class="deliz">
+          <img src="static/assets/divonicaa.png" alt="" class="divonicaa">
+          <img src="static/assets/ale.png" alt="" class="ale">
+          <img src="static/assets/kpop.png" alt="" class="kpop">
+          <img src="static/assets/real.png" alt="" class="real">
+          <img src="static/assets/veve.png" alt="" class="veve">
+          <img src="static/assets/peri.png" alt="" class="peri">
+        </div>
+      </section>
+
+      <img src="static/assets/linha.png" alt="" class="linha-dois">
+
+
+<!-- Quarta parte - Histórico -->
+<section id="historico">
+  <h1 class="historico-titulo">HISTÓRICO</h1>
+  
+  <div class="historico-container">
+    <div class="historico-header">
+      <div class="historico-info">
+        <span>Música</span>
+        <span>Artista</span>
+        <span>Data</span>
+      </div>
+    </div>
+    
+    <div class="historico-list">
+      <!-- Itens do histórico serão gerados via JavaScript -->
+      <div class="historico-vazio">
+        <img src="static/assets/disco.png" alt="Disco vazio" class="disco-vazio">
+        <p>Seu histórico de músicas aparecerá aqui</p>
+      </div>
+    </div>
+    
+    <div class="historico-controls">
+      <button class="historico-btn" id="limpar-historico">
+        Limpar Histórico
+      </button>
+      <button class="historico-btn" id="exportar-historico">
+        Exportar
+      </button>
+    </div>
+  </div>
+</section>
+
+
+
+      <div class="final">
+
+        <h3 class="frase">“Viver, viver e ser livre. Saber dar valor para as coisas mais simples. Só o amor constrói pontes indestrutíveis.”</h3>
+        <img src="static/assets/finalzinho.png" width="800px" alt="" class="finalzinho">
+        <img src="static/assets/finalzao.png" alt="" class="finalzao">
+        <img src="static/assets/DropVinyl.png" width="130px" alt="" class="loguinho">
+        <button class="musiquitas">
+          <a href="#inicio">MÚSICAS</a>
+        </button>
+        <button class="artistass">
+          <a href="#artistas">ARTISTAS</a>
+        </button>
+        <h3 class="fim">A DropVinyl é uma API de música integra dados de serviços externos para oferecer buscas, playlists e experiências musicais personalizadas em tempo real.</h3>
+        <h3 class="top">"A música é a trilha sonora que transforma momentos comuns em memórias inesquecíveis."</h3>
+      </div>
+
+      
+     <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      // aguarda 2 segundos e simula clique no botão
+      setTimeout(() => {
+        botaoConectar.click();
+      }, 1000);
+    });
+  </script>
+
+  <script>
+
+
+  // Gerenciamento do histórico de músicas
+  document.addEventListener('DOMContentLoaded', function() {
+    const historicoList = document.querySelector('.historico-list');
+    const limparBtn = document.getElementById('limpar-historico');
+    const exportarBtn = document.getElementById('exportar-historico');
+    
+    // Carregar histórico do localStorage
+    let historico = JSON.parse(localStorage.getItem('historicoMusicas')) || [];
+    
+    // Função para renderizar o histórico
+    function renderizarHistorico() {
+      if (historico.length === 0) {
+        historicoList.innerHTML = `
+          <div class="historico-vazio">
+            <img src="static/assets/disco.png" alt="Disco vazio" class="disco-vazio">
+            <p>Seu histórico de músicas aparecerá aqui</p>
+          </div>
+        `;
+        return;
+      }
+      
+      historicoList.innerHTML = '';
+      
+      historico.forEach((item, index) => {
+        const historicoItem = document.createElement('div');
+        historicoItem.className = 'historico-item';
+        historicoItem.innerHTML = `
+          <div class="musica-info">
+            <div class="musica-titulo">${item.title || 'Título desconhecido'}</div>
+            <div class="musica-artista">${item.artist || 'Artista desconhecido'}</div>
+          </div>
+          <div class="musica-artista-nome">${item.artist || 'Artista desconhecido'}</div>
+          <div class="musica-data">${formatarData(item.timestamp)}</div>
+        `;
+        
+        historicoItem.addEventListener('click', () => {
+          // Tocar música novamente
+          if (window.tocarMusica) {
+            window.tocarMusica(item.baseUrl, item);
+          }
+        });
+        
+        historicoList.appendChild(historicoItem);
+      });
+    }
+    
+    // Função para formatar data
+    function formatarData(timestamp) {
+      const data = new Date(timestamp);
+      return data.toLocaleDateString('pt-BR');
+    }
+    
+    // Função para adicionar música ao histórico
+    window.adicionarAoHistorico = function(musica, baseUrl) {
+      // Evitar duplicados consecutivos
+      if (historico.length > 0) {
+        const ultima = historico[0];
+        if (ultima.title === musica.title && ultima.artist === musica.artist) {
+          return;
+        }
+      }
+      
+      // Adicionar ao início do array
+      historico.unshift({
+        ...musica,
+        baseUrl: baseUrl,
+        timestamp: Date.now()
+      });
+      
+      // Manter apenas os 50 últimos itens
+      if (historico.length > 10) {
+        historico.pop();
+      }
+      
+      // Salvar no localStorage
+      localStorage.setItem('historicoMusicas', JSON.stringify(historico));
+      
+      // Atualizar a exibição
+      renderizarHistorico();
+    };
+    
+    // Limpar histórico
+    limparBtn.addEventListener('click', function() {
+      if (historico.length > 0 && confirm('Tem certeza que deseja limpar todo o histórico?')) {
+        historico = [];
+        localStorage.removeItem('historicoMusicas');
+        renderizarHistorico();
+      }
+    });
+    
+    // Exportar histórico (simulação)
+    exportarBtn.addEventListener('click', function() {
+      if (historico.length === 0) {
+        alert('Nenhum histórico para exportar.');
+        return;
+      }
+      
+      // Simulação de exportação
+      alert(`Histórico exportado com ${historico.length} músicas!`);
+    });
+    
+    // Inicializar a exibição do histórico
+    renderizarHistorico();
+    
+    // Adicionar elementos decorativos
+    const historicoSection = document.getElementById('historico');
+    const decorativo1 = document.createElement('div');
+    decorativo1.className = 'historico-decorativo decorativo-1';
+    decorativo1.innerHTML = '♫';
+    historicoSection.appendChild(decorativo1);
+    
+    const decorativo2 = document.createElement('div');
+    decorativo2.className = 'historico-decorativo decorativo-2';
+    decorativo2.innerHTML = '♫';
+    historicoSection.appendChild(decorativo2);
+  });
+</script>
+
+    <script src="app.js" defer></script>
+
+  </body>
+</html>
